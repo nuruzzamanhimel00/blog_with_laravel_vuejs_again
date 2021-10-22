@@ -1,5 +1,6 @@
 import compAdminHome from './components/admin/adminHome'
-import compExp from './components/ExampleComponent.vue'
+import compCategoryList from './components/admin/category/categoryList.vue'
+import compCategoryAdd from './components/admin/category/categoryAdd.vue'
 
 export const routes = [
     {
@@ -8,8 +9,13 @@ export const routes = [
         name:'adminHome'
     },
     {
-        path:'/posts',
-        component: compExp,
-        name:'example'
+        path:'/category-list',
+        component: compCategoryList,
+        name:'adminCategoryList'
+    },
+    {
+        path:'/category-add',
+        component: compCategoryAdd,
+        name:'adminCategoryAdd'
     }
 ]

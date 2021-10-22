@@ -23,5 +23,7 @@ Route::get('/{anypath}', 'HomeController@index')->where('path','.*');
 // Route::get('/admin', 'HomeController@index')->name('home');
 
 Route::get('/posts', 'PostController@index')->name('posts');
+//***** Category ****** */
+Route::post('/add-catoegy', 'CategoryController@addCategory')->name('addCategory');
 
 

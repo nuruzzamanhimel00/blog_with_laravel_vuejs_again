@@ -191,20 +191,22 @@
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
-                <i class="right fas fa-angle-left"></i>
+
               </p>
             </router-link>
 
           </li>
           <li class="nav-item">
-            <router-link tag="a" :to="{ name:'example'}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+            <router-link tag="a" :to="{   name:'adminCategoryList' }"  class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Posts
+                Categories
 
               </p>
             </router-link>
+
           </li>
+
 
         </ul>
       </nav>
