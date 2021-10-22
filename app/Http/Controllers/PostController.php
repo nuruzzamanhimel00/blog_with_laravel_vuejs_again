@@ -15,12 +15,10 @@ class PostController extends Controller
 
 
     public function index(){
-        // $posts = Post::with(['category','user'])->get();
-        // return $posts;
+        $posts = Post::with(['category','user'])->get();
+        return $posts;
 
-        $categorys = Category::with(['posts'])->get();
-        dd($categorys);
-        return $categorys;
+
 
     }
 
