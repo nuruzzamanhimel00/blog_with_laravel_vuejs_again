@@ -17,7 +17,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/admin', 'HomeController@index')->name('home');
+
+Route::get('/{anypath}', 'HomeController@index')->where('path','.*');
+
+// Route::get('/admin', 'HomeController@index')->name('home');
 
 Route::get('/posts', 'PostController@index')->name('posts');
+
 
