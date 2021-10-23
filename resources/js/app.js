@@ -2,6 +2,9 @@
 require('./bootstrap');
 window.Vue = require('vue');
 
+//vuex integrate
+import {store} from './store/store.js'
+
 // install vue
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
@@ -9,8 +12,12 @@ import {routes} from './routes.js'
 
 const router = new VueRouter({
     routes, // short for `routes: routes`
-    mode:'history'
+    mode:'hash'
   })
+// import filter
+import {filter} from './filters.js'
+
+
 
 
 
@@ -22,5 +29,6 @@ Vue.component('admin-master', require('./components/admin/adminMaster.vue').defa
 
 const app = new Vue({
     el: '#app',
-    router
+    router,
+    store: store,
 });

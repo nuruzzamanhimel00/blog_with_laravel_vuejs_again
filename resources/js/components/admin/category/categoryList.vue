@@ -12,6 +12,7 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
+                  <!-- {{ getAllCategory }} -->
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
@@ -23,13 +24,16 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td>Trident</td>
-                    <td>Internet
-                      Explorer 4.0
+
+                 <tr v-for="(value , key)  in getAllCategory " :key="key"  >
+                    <td>{{key+1}}</td>
+                    <td>{{value.cat_name | toUpperCase}}</td>
+                    <td>{{value.created_at | dateTimeFormate}}</td>
+                    <td>
+                        <a href="" class="btn btn-success">Edit</a>
+                        <a href="" class="btn btn-danger">Delete</a>
                     </td>
-                    <td>Win 95+</td>
-                    <td> 4</td>
+
 
                   </tr>
                   </tbody>
@@ -48,3 +52,26 @@
     </section>
     </div>
 </template>
+
+<script>
+export default {
+    data(){
+        return {
+
+        }
+    },
+    mounted() {
+        this.$store.dispatch('getAllCategoryAction');
+    },
+    created() {},
+    computed:{
+        getAllCategory(){
+            return this.$store.getters.getAllCategorGetters;
+        }
+    },
+    methods: {
+
+    }
+
+}
+</script>

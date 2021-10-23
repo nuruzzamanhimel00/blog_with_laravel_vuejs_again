@@ -32,5 +32,16 @@ class CategoryController extends Controller
 
     }
 
+    public function getAllCategory(){
+
+        $category = Category::get();
+
+        return response()->json([
+            'category' => $category
+        ]);
+    }
+
+
+
 
 }
