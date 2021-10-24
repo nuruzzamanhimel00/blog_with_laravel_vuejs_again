@@ -2217,6 +2217,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2275,6 +2277,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+// ES6 Modules or TypeScript
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {};
@@ -2288,7 +2292,42 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.getters.getAllCategorGetters;
     }
   },
-  methods: {}
+  methods: {
+    deleteCategory: function deleteCategory(id) {
+      var _this = this;
+
+      sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(function (result) {
+        if (result.isConfirmed) {
+          axios.get("/delete-category/".concat(id)).then(function (reflection) {
+            if (reflection.data.status == 'success') {
+              var Toast = sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: function didOpen(toast) {
+                  toast.addEventListener('mouseenter', sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.stopTimer);
+                  toast.addEventListener('mouseleave', sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.resumeTimer);
+                }
+              });
+              sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire('Deleted!', 'Your file has been deleted.', 'success');
+
+              _this.$store.dispatch('getAllCategoryAction');
+            }
+          });
+        }
+      }); // alert(id);
+    }
+  }
 });
 
 /***/ }),
@@ -63895,7 +63934,12 @@ var render = function() {
                                 "a",
                                 {
                                   staticClass: "btn btn-danger",
-                                  attrs: { href: "" }
+                                  on: {
+                                    click: function($event) {
+                                      $event.preventDefault()
+                                      return _vm.deleteCategory(value.id)
+                                    }
+                                  }
                                 },
                                 [_vm._v("Delete")]
                               )

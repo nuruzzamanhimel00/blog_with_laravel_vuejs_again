@@ -58,7 +58,17 @@ class CategoryController extends Controller
                 'status' => 'success'
             ]);
         }
-        dd($request->all() ,$id);
+        // dd($request->all() ,$id);
+    }
+
+    public function deleteCategory($id){
+        $category = Category::destroy($id);
+        if($category){
+            return response()->json([
+                'status' => 'success'
+            ]);
+        }
+        // dd($id);
     }
 
 

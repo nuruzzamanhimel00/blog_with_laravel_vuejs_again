@@ -30,4 +30,5 @@ Route::post('/add-catoegy', 'CategoryController@addCategory')->name('addCategory
 Route::get('/get-all-category', 'CategoryController@getAllCategory')->name('getAllCategory');
 Route::get('/edit-category/{id}', 'CategoryController@editCategory')->name('editCategory');
 Route::post('/update-category/{id}', 'CategoryController@updatetCategory')->name('updateCategory');
+Route::get('/delete-category/{id}', 'CategoryController@deleteCategory')->name('deleteCategory');
 
