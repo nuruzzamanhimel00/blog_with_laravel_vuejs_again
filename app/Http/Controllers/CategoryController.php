@@ -34,11 +34,31 @@ class CategoryController extends Controller
 
     public function getAllCategory(){
 
-        $category = Category::get();
+        $category = Category::orderBy('id','desc')->get();
 
         return response()->json([
             'category' => $category
         ]);
+    }
+
+    public function editCategory($id){
+
+        $category = Category::find($id);
+        if($category){
+            return response()->json([
+                'category' => $category
+            ]);
+        }
+    }
+
+    public function updatetCategory(Request $request,$id){
+        $category = Category::where('id',$id)->update($request->all());
+        if($category){
+            return response()->json([
+                'status' => 'success'
+            ]);
+        }
+        dd($request->all() ,$id);
     }
 
 

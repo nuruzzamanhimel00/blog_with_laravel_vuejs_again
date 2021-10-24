@@ -28,4 +28,6 @@ Route::get('/posts', 'PostController@index')->name('posts');
 Route::post('/add-catoegy', 'CategoryController@addCategory')->name('addCategory');
 
 Route::get('/get-all-category', 'CategoryController@getAllCategory')->name('getAllCategory');
+Route::get('/edit-category/{id}', 'CategoryController@editCategory')->name('editCategory');
+Route::post('/update-category/{id}', 'CategoryController@updatetCategory')->name('updateCategory');
 

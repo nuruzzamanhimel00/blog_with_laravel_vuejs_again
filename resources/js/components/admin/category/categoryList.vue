@@ -30,7 +30,10 @@
                     <td>{{value.cat_name | toUpperCase}}</td>
                     <td>{{value.created_at | dateTimeFormate}}</td>
                     <td>
-                        <a href="" class="btn btn-success">Edit</a>
+                        <router-link tag="a"
+                        :to="{ name:'adminCategoryEdit', params:{id:value.id} }"
+                         class="btn btn-success">Edit
+                         </router-link>
                         <a href="" class="btn btn-danger">Delete</a>
                     </td>
 
