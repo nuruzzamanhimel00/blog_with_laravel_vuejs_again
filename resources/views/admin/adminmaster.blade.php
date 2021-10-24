@@ -206,6 +206,16 @@
             </router-link>
 
           </li>
+             <li class="nav-item">
+            <router-link tag="a" :to="{   name:'adminPostlist' }"  class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Posts
+
+              </p>
+            </router-link>
+
+          </li>
 
 
         </ul>

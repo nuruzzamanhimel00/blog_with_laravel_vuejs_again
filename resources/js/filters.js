@@ -13,3 +13,8 @@ Vue.filter('toUpperCase', function (value) {
 
    return value.toUpperCase();
 });
+
+Vue.filter('textLength', function (value,length,dotdot) {
+
+    return value.substr(0,length)+""+dotdot;
+ });

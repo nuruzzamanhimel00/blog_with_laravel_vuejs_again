@@ -15,10 +15,11 @@ class PostController extends Controller
 
 
     public function index(){
-        $posts = Post::with(['category','user'])->get();
-        return $posts;
-
-
+        $posts = Post::with(['category','user'])->orderBy('id','desc')->get();
+        return response()->json([
+            'posts' => $posts
+        ]);
+        // return $posts;
 
     }
 
