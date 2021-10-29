@@ -10,6 +10,7 @@ export const store = new Vuex.Store({
         categories:[],
         posts:[],
         users:[],
+        singlePost:[]
     },
     getters:{
         getAllCategorGetters(state){
@@ -20,6 +21,9 @@ export const store = new Vuex.Store({
         },
         getAllUsersGetters(state){
             return state.users;
+        },
+        getSInglePostByIdGetters(state){
+            return state.singlePost;
         }
     },
     mutations: {
@@ -32,6 +36,9 @@ export const store = new Vuex.Store({
         },
         getAllUserMutation(state,data){
             state.users = data;
+        },
+        getSInglePostByIdMutation(state,data){
+            state.singlePost = data;
         }
     },
     actions: {
@@ -55,6 +62,15 @@ export const store = new Vuex.Store({
             .then((reflection)=>{
                 context.commit('getAllUserMutation',reflection.data.users);
                 // console.log(reflection.data.users);
+            });
+        },
+        getSInglePostByIdAction(context,id){
+            axios.get(`getSinglePostByid/${id}`)
+            .then((reflection)=>{
+                context.commit('getSInglePostByIdMutation',reflection.data.post);
+                // console.log(reflection.data.post);
+            }).catch(()=>{
+                alert('server reflction error');
             });
         }
     }

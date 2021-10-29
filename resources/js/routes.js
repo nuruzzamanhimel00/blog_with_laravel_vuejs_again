@@ -8,6 +8,8 @@ import compPostEdit from './components/admin/post/postEdit.vue'
 import compPostadd from './components/admin/post/postAdd.vue'
 // fontend
 import compHome from './components/public/home.vue'
+import compBlogpost from './components/public/blog/blogPost.vue'
+import cimpSinglepost from './components/public/blog/blogSInglepost.vue'
 
 export const routes = [
     {
@@ -51,6 +53,16 @@ export const routes = [
         path:'/',
         component: compHome,
         name:'publicHome'
+    },
+    {
+        path:'/posts',
+        component: compBlogpost,
+        name:'publicBlogpost'
+    },
+    {
+        path:'/post/:id',
+        component: cimpSinglepost,
+        name:'publicBlogSinglepost'
     },
 
 

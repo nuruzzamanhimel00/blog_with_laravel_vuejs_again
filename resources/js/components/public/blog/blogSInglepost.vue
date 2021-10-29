@@ -1,0 +1,108 @@
+<template>
+    <span id="blogPosts">
+         <section id="inner-headline">
+            <div class="container">
+                <div class="row">
+                <div class="span4">
+                    <div class="inner-heading">
+                    <h2>Blog left sidebar</h2>
+                    </div>
+                </div>
+                <div class="span8">
+                    <ul class="breadcrumb">
+                    <li><a href="#"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+                    <li><a href="#">Blog</a><i class="icon-angle-right"></i></li>
+                    <li class="active">Blog with left sidebar</li>
+                    </ul>
+                </div>
+                </div>
+            </div>
+        </section>
+        <section id="content">
+        <div class="container">
+            <div class="row">
+            <div class="span8">
+                {{ getSinglePost.title }}
+                <article>
+                    <div class="row">
+                        <div class="span8">
+                        <div class="post-image">
+                            <div class="post-heading">
+                            <h3><a href="#">{{getSinglePost.title }}</a></h3>
+                            </div>
+                            <img :src="postImage(getSinglePost.photo)" alt="" style="width:100%;height:300px;" />
+                        </div>
+                        <p>
+                        {{ getSinglePost .description }}
+                        </p>
+                        <div class="bottom-article">
+                            <ul class="meta-post">
+                            <li><i class="icon-calendar"></i><a href="#">
+                                {{ getSinglePost .created_at | dateTimeFormateMMDDYY }}
+                                <!-- Mar 23, 2013 -->
+                                </a></li>
+                            <li><i class="icon-user"></i><a href="#">
+                                {{ getSinglePost .user != null ? getSinglePost.user.name : "" }}
+                                </a></li>
+                            <li><i class="icon-folder-open"></i><a href="#"> Blog</a></li>
+                            <li><i class="icon-comments"></i><a href="#">4 Comments</a></li>
+                            </ul>
+
+                        </div>
+                        </div>
+                    </div>
+                </article>
+
+
+
+
+            </div>
+
+            <!-- // ***************** Sidebar *********** -->
+            <compBlogsidebar></compBlogsidebar>
+
+            </div>
+        </div>
+        </section>
+    </span>
+</template>
+
+
+<script>
+
+import compBlogsidebar from './blogSidebar.vue'
+export default {
+    data(){
+        return {
+            id: this.$route.params.id,
+        }
+    },
+    mounted(){
+        this.singlePost();
+    },
+
+    computed:{
+        getSinglePost(){
+           return  this.$store.getters.getSInglePostByIdGetters;
+        }
+    },
+    methods:{
+         postImage(image){
+             let str1 = image;
+            if(str1.indexOf('data') != -1){
+                return image;
+                // console.log(str2 + " found");
+            }else{
+              return   'assets/images/'+image;
+            }
+        },
+        singlePost(){
+             this.$store.dispatch('getSInglePostByIdAction',this.id);
+        }
+    },
+    components:{
+        compBlogsidebar
+
+    }
+}
+</script>

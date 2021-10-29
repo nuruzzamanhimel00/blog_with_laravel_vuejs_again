@@ -14,9 +14,11 @@ Auth::routes();
 //******************* Public panel ********************* */
 Route::get('/', 'PublicController@index')->name('home');
 
+Route::get('/getSinglePostByid/{id}', 'BlogController@singlePostById')->name('getSinglePostByid');
+
 
 // *************** Admin Panel ****************************
-Route::get('/admin', 'HomeController@index')->name('home');
+Route::get('/admin', 'HomeController@index')->name('admin');
 
 Route::get('/posts', 'PostController@index')->name('posts');
 //***** Category ****** */
