@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Post;
 use Illuminate\Http\Request;
+use Image;
+use File;
 
 class PostController extends Controller
 {
@@ -30,6 +32,68 @@ class PostController extends Controller
         ]);
         // return $posts;
         // dd($id);
+    }
+
+    public function updatePost(Request $request,$id){
+
+        $this->validate($request, [
+            'title' => 'required',
+            'description' => 'required',
+            'cat_id' => 'required',
+            'user_id' => 'required',
+            'photo' => 'required',
+        ]);
+
+        $posts = Post::find($id);
+
+        if($posts->photo != $request->photo){
+
+            $str_pos = strpos($request->photo,';');
+            $string = substr($request->photo,0,$str_pos);
+            $get_extention = substr(strrchr($string,'/'),1);
+
+            $image_name = rand().".".$get_extention;
+            $image_save = public_path('assets/images/'.$image_name);
+
+            // dd($image_save);
+
+            // read image from temporary file
+            $img = Image::make($request->photo);
+            $img->save($image_save);
+
+            // old image delte
+            $existing_image_url = public_path('assets/images/'.$posts->photo);
+            if(file_exists($existing_image_url)){
+                File::delete($existing_image_url);
+            }
+
+            $posts->update([
+                'title' => $request->title,
+                'description' => $request->description,
+                'cat_id' => $request->cat_id,
+                'user_id' => $request->user_id,
+                'photo' => $image_name,
+            ]);
+
+
+
+            // dd($str_pos , $string, $get_extention, $request->photo);
+
+
+
+        }else{
+            $posts->update([
+                'title' => $request->title,
+                'description' => $request->description,
+                'cat_id' => $request->cat_id,
+                'user_id' => $request->user_id,
+            ]);
+        }
+
+        return response()->json([
+            'status' => 'success'
+        ]);
+        // dd($request->all() , $id);
     }
 
 

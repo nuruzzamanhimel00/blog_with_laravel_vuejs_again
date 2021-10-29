@@ -34,7 +34,7 @@
                           <td>{{value.title}}</td>
                           <td>{{value.description  | textLength(150,'.....') }}</td>
                           <td>
-                              <img :src="value.photo" alt="" class="img-fluid">
+                              <img :src="postImage(value.photo)" alt="" class="img-fluid">
                           </td>
                           <td>
                               <router-link tag="a" :to="{ name:'adminPostedit', params:{id:value.id} }" class="btn btn-success">Edit</router-link>
@@ -78,7 +78,15 @@ export default {
         }
     },
     methods: {
-
+        postImage(image){
+             let str1 = image;
+            if(str1.indexOf('data') != -1){
+                return image;
+                // console.log(str2 + " found");
+            }else{
+              return   'assets/images/'+image;
+            }
+        }
     }
 
 }

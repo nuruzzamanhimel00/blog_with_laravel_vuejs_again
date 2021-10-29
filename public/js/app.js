@@ -2503,9 +2503,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       reader.readAsDataURL(file); // console.log( event.target.files);
     },
     postImage: function postImage() {
-      return this.form.photo;
+      var str1 = this.form.photo;
+
+      if (str1.indexOf('data') != -1) {
+        return this.form.photo; // console.log(str2 + " found");
+      } else {
+        return 'assets/images/' + this.form.photo;
+      } // return this.form.photo;
+
     },
-    categoryUpdate: function categoryUpdate() {
+    postUpdate: function postUpdate() {
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -2515,7 +2522,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return _this3.form.post("/update-category/".concat(_this3.id)).then(function (reflection) {
+                return _this3.form.post("/update-post/".concat(_this3.id)).then(function (reflection) {
                   console.log(reflection);
 
                   if (reflection.data.status == 'success') {
@@ -2532,11 +2539,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     });
                     Toast.fire({
                       icon: 'success',
-                      title: "Category Update Successfully"
+                      title: "Post Update Successfully"
                     });
 
                     _this3.$router.push({
-                      name: 'adminCategoryList'
+                      name: 'adminPostlist'
                     });
                   }
                 })["catch"](function (error) {
@@ -2646,7 +2653,17 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.getters.getAllPostGetters;
     }
   },
-  methods: {}
+  methods: {
+    postImage: function postImage(image) {
+      var str1 = image;
+
+      if (str1.indexOf('data') != -1) {
+        return image; // console.log(str2 + " found");
+      } else {
+        return 'assets/images/' + image;
+      }
+    }
+  }
 });
 
 /***/ }),
@@ -64787,7 +64804,10 @@ var render = function() {
                           _c("td", [
                             _c("img", {
                               staticClass: "img-fluid",
-                              attrs: { src: value.photo, alt: "" }
+                              attrs: {
+                                src: _vm.postImage(value.photo),
+                                alt: ""
+                              }
                             })
                           ]),
                           _vm._v(" "),

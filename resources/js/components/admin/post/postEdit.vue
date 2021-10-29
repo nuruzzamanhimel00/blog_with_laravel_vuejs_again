@@ -151,11 +151,18 @@ export default {
             // console.log( event.target.files);
         },
         postImage(){
-            return this.form.photo;
+            let str1 = this.form.photo;
+            if(str1.indexOf('data') != -1){
+                return this.form.photo;
+                // console.log(str2 + " found");
+            }else{
+              return   'assets/images/'+this.form.photo;
+            }
+            // return this.form.photo;
         },
-        async categoryUpdate () {
+        async postUpdate () {
             //  alert('form submit');
-            const response = await this.form.post(`/update-category/${this.id}`)
+            const response = await this.form.post(`/update-post/${this.id}`)
             .then((reflection)=>{
                 console.log(reflection);
                 if(reflection.data.status == 'success'){
@@ -173,10 +180,10 @@ export default {
 
                         Toast.fire({
                         icon: 'success',
-                        title: "Category Update Successfully"
+                        title: "Post Update Successfully"
                         });
 
-                        this.$router.push({ name:'adminCategoryList'});
+                        this.$router.push({ name:'adminPostlist'});
                 }
 
             }).catch((error)=>{
