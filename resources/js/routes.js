@@ -5,6 +5,7 @@ import compCategoryEdit from './components/admin/category/categoryEdit.vue'
 //post
 import compPostlist from './components/admin/post/postList.vue'
 import compPostEdit from './components/admin/post/postEdit.vue'
+import compPostadd from './components/admin/post/postAdd.vue'
 
 export const routes = [
     {
@@ -36,5 +37,10 @@ export const routes = [
         path:'/post-edit/:id',
         component: compPostEdit,
         name:'adminPostedit'
+    },
+    {
+        path:'/post-add',
+        component: compPostadd,
+        name:'adminPostAdd'
     },
 ]

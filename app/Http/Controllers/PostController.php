@@ -117,4 +117,45 @@ class PostController extends Controller
     }
 
 
+    public function addPost(Request $request){
+
+        $this->validate($request, [
+            'title' => 'required',
+            'description' => 'required',
+            'cat_id' => 'required',
+            'user_id' => 'required',
+            'photo' => 'required',
+        ]);
+
+        $str_pos = strpos($request->photo,';');
+        $string = substr($request->photo,0,$str_pos);
+        $get_extention = substr(strrchr($string,'/'),1);
+
+        $image_name = rand().".".$get_extention;
+        $image_save = public_path('assets/images/'.$image_name);
+
+        // dd($image_save);
+
+        // read image from temporary file
+        $img = Image::make($request->photo);
+        $img->save($image_save);
+
+        $post = Post::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'cat_id' => $request->cat_id,
+            'user_id' => $request->user_id,
+            'photo' => $image_name,
+        ]);
+        if($post){
+            return response()->json([
+                'status' => 'success'
+            ]);
+        }
+
+
+        dd($request->all());
+    }
+
+
 }

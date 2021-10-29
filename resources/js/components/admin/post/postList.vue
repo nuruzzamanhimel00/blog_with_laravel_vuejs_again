@@ -8,7 +8,7 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Post List</h3>
-                <router-link tag='a' :to="{    name:'adminCategoryAdd'}" class="btn btn-success float-right">Add Category</router-link>
+                <router-link tag='a' :to="{    name:'adminPostAdd'}" class="btn btn-success float-right">Add Post</router-link>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
