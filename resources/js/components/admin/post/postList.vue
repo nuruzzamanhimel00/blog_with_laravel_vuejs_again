@@ -38,7 +38,7 @@
                           </td>
                           <td>
                               <router-link tag="a" :to="{ name:'adminPostedit', params:{id:value.id} }" class="btn btn-success">Edit</router-link>
-                              <a href="" class="btn btn-danger">Delete</a>
+                              <a href="javascript:void(0);" @click.prevent="postDelete(value.id)" class="btn btn-danger">Delete</a>
                           </td>
                       </tr>
                   </tbody>
@@ -86,6 +86,36 @@ export default {
             }else{
               return   'assets/images/'+image;
             }
+        },
+        postDelete(id){
+           Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+            if (result.isConfirmed) {
+
+                axios.get(`/post-delete/${id}`)
+                .then((reflection)=>{
+                    if(reflection.data.status == 'success'){
+                         Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                            )
+                             this.$store.dispatch('getAllPostAction');
+                    }
+                    // console.log(reflection.data.status);
+                }).catch((data)=>{
+                    console.log('reflection error');
+                });
+
+            }
+            })
         }
     }
 

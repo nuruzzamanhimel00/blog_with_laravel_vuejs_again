@@ -35,5 +35,6 @@ Route::get('/delete-category/{id}', 'CategoryController@deleteCategory')->name('
 Route::get('/all-post', 'PostController@index')->name('allPost');
 Route::get('/postByid/{id}', 'PostController@postByid')->name('postByid');
 Route::post('/update-post/{id}', 'PostController@updatePost')->name('updatePost');
+Route::get('/post-delete/{id}', 'PostController@postDelete')->name('post-delete');
 //users
 Route::get('/get-all-users', 'UserController@allUsers')->name('allUsers');

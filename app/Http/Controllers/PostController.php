@@ -96,5 +96,25 @@ class PostController extends Controller
         // dd($request->all() , $id);
     }
 
+    public function postDelete($id){
+
+        $posts = Post::find($id);
+
+        // old image delte
+        $existing_image_url = public_path('assets/images/'.$posts->photo);
+        if(file_exists($existing_image_url)){
+            File::delete($existing_image_url);
+        }
+
+
+        if($posts->delete()){
+            return response()->json([
+                'status' => 'success'
+            ]);
+        }
+
+        // dd($id);
+    }
+
 
 }

@@ -2662,6 +2662,32 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         return 'assets/images/' + image;
       }
+    },
+    postDelete: function postDelete(id) {
+      var _this = this;
+
+      sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(function (result) {
+        if (result.isConfirmed) {
+          axios.get("/post-delete/".concat(id)).then(function (reflection) {
+            if (reflection.data.status == 'success') {
+              sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire('Deleted!', 'Your file has been deleted.', 'success');
+
+              _this.$store.dispatch('getAllPostAction');
+            } // console.log(reflection.data.status);
+
+          })["catch"](function (data) {
+            console.log('reflection error');
+          });
+        }
+      });
     }
   }
 });
@@ -64833,7 +64859,13 @@ var render = function() {
                                 "a",
                                 {
                                   staticClass: "btn btn-danger",
-                                  attrs: { href: "" }
+                                  attrs: { href: "javascript:void(0);" },
+                                  on: {
+                                    click: function($event) {
+                                      $event.preventDefault()
+                                      return _vm.postDelete(value.id)
+                                    }
+                                  }
                                 },
                                 [_vm._v("Delete")]
                               )
