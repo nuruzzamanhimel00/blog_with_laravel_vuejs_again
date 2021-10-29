@@ -23,5 +23,14 @@ class PostController extends Controller
 
     }
 
+    public function postByid($id){
+        $posts = Post::with(['category','user'])->find($id);
+        return response()->json([
+            'posts' => $posts
+        ]);
+        // return $posts;
+        // dd($id);
+    }
+
 
 }

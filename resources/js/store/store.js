@@ -8,7 +8,8 @@
 export const store = new Vuex.Store({
     state: {
         categories:[],
-        posts:[]
+        posts:[],
+        users:[],
     },
     getters:{
         getAllCategorGetters(state){
@@ -16,6 +17,9 @@ export const store = new Vuex.Store({
         },
         getAllPostGetters(state){
             return state.posts;
+        },
+        getAllUsersGetters(state){
+            return state.users;
         }
     },
     mutations: {
@@ -25,6 +29,9 @@ export const store = new Vuex.Store({
         getAllPostMutation(state,data){
             state.posts = data;
             // console.log(data);
+        },
+        getAllUserMutation(state,data){
+            state.users = data;
         }
     },
     actions: {
@@ -41,6 +48,13 @@ export const store = new Vuex.Store({
             axios.get('/all-post')
             .then((reflection)=>{
                 context.commit('getAllPostMutation',reflection.data.posts);
+            });
+        },
+        getAllUserAction(context){
+            axios.get('/get-all-users')
+            .then((reflection)=>{
+                context.commit('getAllUserMutation',reflection.data.users);
+                // console.log(reflection.data.users);
             });
         }
     }

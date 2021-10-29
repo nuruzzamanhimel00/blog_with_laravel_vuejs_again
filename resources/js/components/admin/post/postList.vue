@@ -37,7 +37,7 @@
                               <img :src="value.photo" alt="" class="img-fluid">
                           </td>
                           <td>
-                              <a href="" class="btn btn-success">Edit</a>
+                              <router-link tag="a" :to="{ name:'adminPostedit', params:{id:value.id} }" class="btn btn-success">Edit</router-link>
                               <a href="" class="btn btn-danger">Delete</a>
                           </td>
                       </tr>
