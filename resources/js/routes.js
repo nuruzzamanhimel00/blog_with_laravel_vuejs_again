@@ -6,6 +6,8 @@ import compCategoryEdit from './components/admin/category/categoryEdit.vue'
 import compPostlist from './components/admin/post/postList.vue'
 import compPostEdit from './components/admin/post/postEdit.vue'
 import compPostadd from './components/admin/post/postAdd.vue'
+// fontend
+import compHome from './components/public/home.vue'
 
 export const routes = [
     {
@@ -43,4 +45,13 @@ export const routes = [
         component: compPostadd,
         name:'adminPostAdd'
     },
+    // fontend
+
+    {
+        path:'/',
+        component: compHome,
+        name:'publicHome'
+    },
+
+
 ]
