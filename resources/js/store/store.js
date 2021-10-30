@@ -10,7 +10,8 @@ export const store = new Vuex.Store({
         categories:[],
         posts:[],
         users:[],
-        singlePost:[]
+        singlePost:[],
+        postCatId:[],
     },
     getters:{
         getAllCategorGetters(state){
@@ -24,6 +25,9 @@ export const store = new Vuex.Store({
         },
         getSInglePostByIdGetters(state){
             return state.singlePost;
+        },
+        getPostByCatidGetters(state){
+            return state.postCatId;
         }
     },
     mutations: {
@@ -39,6 +43,9 @@ export const store = new Vuex.Store({
         },
         getSInglePostByIdMutation(state,data){
             state.singlePost = data;
+        },
+        getPostByCatidMutation(state,data){
+            state.postCatId = data;
         }
     },
     actions: {
@@ -85,6 +92,14 @@ export const store = new Vuex.Store({
                 context.commit('getAllCategoryMutation',reflection.data.category);
                 // console.log(reflection.data.category);
             });
+        },
+        getPostByCatidAction(context,id){
+            axios.get(`/public-get-post-catid/${id}`)
+            .then((reflection)=>{
+                context.commit('getPostByCatidMutation',reflection.data.posts);
+                // console.log(reflection.data.category);
+            });
+            // alert(id);
         }
     }
   })

@@ -10,6 +10,7 @@ import compPostadd from './components/admin/post/postAdd.vue'
 import compHome from './components/public/home.vue'
 import compBlogpost from './components/public/blog/blogPost.vue'
 import cimpSinglepost from './components/public/blog/blogSInglepost.vue'
+import compPostByCat from './components/public/blog/blogPostWithCategory.vue'
 
 export const routes = [
     {
@@ -64,6 +65,12 @@ export const routes = [
         component: cimpSinglepost,
         name:'publicBlogSinglepost'
     },
+    {
+        path:'/postByCat/:id',
+        component: compPostByCat,
+        name:'publiccompPostByCat'
+    },
+
 
 
 ]

@@ -36,4 +36,12 @@ class BlogController extends Controller
         ]);
     }
 
+    public function getPostByCatid($id){
+        $posts = Post::with(['category','user'])->where('cat_id',$id)->orderBy('id','desc')->get();
+        return response()->json([
+            'posts' => $posts
+        ]);
+        // dd($id);
+    }
+
 }

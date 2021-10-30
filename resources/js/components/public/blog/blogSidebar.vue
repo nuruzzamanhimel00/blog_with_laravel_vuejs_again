@@ -14,7 +14,9 @@
                 <ul class="cat">
                    <li  v-for="(value,key) in getAllCategory" :key="key" >
                       <i class="icon-angle-right"></i>
-                        <a href="#">{{value.cat_name}}</a>
+                        <router-link  :to="{   name:'publiccompPostByCat', params:{id:value.id} }"
+
+                        >{{value.cat_name}}</router-link>
                         <span> ({{ value.posts_count }}) </span>
 
                     </li>
