@@ -22,35 +22,35 @@
         <div class="container">
             <div class="row">
             <div class="span8">
-                {{ getSinglePost.title }}
-                <article>
-                    <div class="row">
-                        <div class="span8">
-                        <div class="post-image">
-                            <div class="post-heading">
-                            <h3><a href="#">{{getSinglePost.title }}</a></h3>
-                            </div>
-                            <img :src="postImage(getSinglePost.photo)" alt="" style="width:100%;height:300px;" />
+                <!-- {{ getSinglePost }} -->
+                 <article v-for="(value,key) in getSinglePost" :key="key">
+                <div class="row">
+                    <div class="span8">
+                    <div class="post-image">
+                        <div class="post-heading">
+                        <h3><a href="#">{{ value.title | toUpperCase }}</a></h3>
                         </div>
-                        <p>
-                        {{ getSinglePost .description }}
-                        </p>
-                        <div class="bottom-article">
-                            <ul class="meta-post">
-                            <li><i class="icon-calendar"></i><a href="#">
-                                {{ getSinglePost .created_at | dateTimeFormateMMDDYY }}
-                                <!-- Mar 23, 2013 -->
-                                </a></li>
-                            <li><i class="icon-user"></i><a href="#">
-                                {{ getSinglePost .user != null ? getSinglePost.user.name : "" }}
-                                </a></li>
-                            <li><i class="icon-folder-open"></i><a href="#"> Blog</a></li>
-                            <li><i class="icon-comments"></i><a href="#">4 Comments</a></li>
-                            </ul>
-
-                        </div>
-                        </div>
+                        <img :src="postImage(value.photo)" alt="" style="width:100%;height:300px;" />
                     </div>
+                    <p>
+                      {{ value.description | textLength(200,'----') }}
+                    </p>
+                    <div class="bottom-article">
+                        <ul class="meta-post">
+                        <li><i class="icon-calendar"></i><a href="#">
+                            {{ value.created_at | dateTimeFormateMMDDYY }}
+                            <!-- Mar 23, 2013 -->
+                            </a></li>
+                        <li><i class="icon-user"></i><a href="#">
+                            {{ value.user != null ? value.user.name : "" }}
+                            </a></li>
+                        <li><i class="icon-folder-open"></i><a href="#"> Blog</a></li>
+                        <li><i class="icon-comments"></i><a href="#">4 Comments</a></li>
+                        </ul>
+                        <router-link tag="a" :to="{ name:'publicBlogSinglepost',  params:{id:value.id} }"  class="pull-right">Continue reading <i class="icon-angle-right"></i></router-link>
+                    </div>
+                    </div>
+                </div>
                 </article>
 
 
