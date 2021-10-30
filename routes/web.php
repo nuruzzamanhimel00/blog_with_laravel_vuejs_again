@@ -15,6 +15,8 @@ Auth::routes();
 Route::get('/', 'PublicController@index')->name('home');
 
 Route::get('/getSinglePostByid/{id}', 'BlogController@singlePostById')->name('getSinglePostByid');
+Route::get('/public-all-post', 'BlogController@getAllPost')->name('public.allPost');
+Route::get('/public-get-all-category', 'BlogController@getAllCategory')->name('public.getAllCategory');
 
 
 // *************** Admin Panel ****************************

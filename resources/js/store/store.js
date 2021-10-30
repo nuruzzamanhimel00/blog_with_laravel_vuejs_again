@@ -72,6 +72,19 @@ export const store = new Vuex.Store({
             }).catch(()=>{
                 alert('server reflction error');
             });
+        },
+        publicGetAllPostAction(context){
+            axios.get('/public-all-post')
+            .then((reflection)=>{
+                context.commit('getAllPostMutation',reflection.data.posts);
+            });
+        },
+        publicGetAllCategoryAction(context){
+            axios.get('/public-get-all-category')
+            .then((reflection)=>{
+                context.commit('getAllCategoryMutation',reflection.data.category);
+                // console.log(reflection.data.category);
+            });
         }
     }
   })

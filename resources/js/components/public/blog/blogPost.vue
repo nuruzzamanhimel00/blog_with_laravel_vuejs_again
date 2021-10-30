@@ -76,7 +76,7 @@ export default {
         }
     },
     mounted(){
-        this.$store.dispatch('getAllPostAction');
+        // this.$store.dispatch('publicGetAllPostAction');
     },
     created(){
 

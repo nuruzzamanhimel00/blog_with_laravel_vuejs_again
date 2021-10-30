@@ -80,7 +80,12 @@ export default {
     mounted(){
         this.singlePost();
     },
-
+    watch:{
+        $route(to,from){
+            // alert('watch load');
+            this.singlePost();
+        }
+    },
     computed:{
         getSinglePost(){
            return  this.$store.getters.getSInglePostByIdGetters;
@@ -97,7 +102,8 @@ export default {
             }
         },
         singlePost(){
-             this.$store.dispatch('getSInglePostByIdAction',this.id);
+            // alert('singlePost');
+             this.$store.dispatch('getSInglePostByIdAction',this.$route.params.id);
         }
     },
     components:{
