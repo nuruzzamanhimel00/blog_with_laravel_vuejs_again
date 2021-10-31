@@ -12,6 +12,7 @@ export const store = new Vuex.Store({
         users:[],
         singlePost:[],
         postCatId:[],
+        sidebarLastesPost:[]
     },
     getters:{
         getAllCategorGetters(state){
@@ -28,6 +29,9 @@ export const store = new Vuex.Store({
         },
         getPostByCatidGetters(state){
             return state.postCatId;
+        },
+        publicSidebarLatestPostGetters(state){
+            return state.sidebarLastesPost;
         }
     },
     mutations: {
@@ -46,6 +50,9 @@ export const store = new Vuex.Store({
         },
         getPostByCatidMutation(state,data){
             state.postCatId = data;
+        },
+        publicSidebarLatestPostAction(state,data){
+            state.sidebarLastesPost = data;
         }
     },
     actions: {
@@ -100,6 +107,13 @@ export const store = new Vuex.Store({
                 // console.log(reflection.data.category);
             });
             // alert(id);
+        },
+        publicSidebarLatestPostAction(context){
+            axios.get('/public-sidebar-latest-post')
+            .then((reflection)=>{
+                context.commit('publicSidebarLatestPostAction',reflection.data.posts);
+
+            });
         }
     }
   })

@@ -44,4 +44,11 @@ class BlogController extends Controller
         // dd($id);
     }
 
+    public function getLatestPost(){
+        $posts = Post::with(['category','user'])->orderBy('id','desc')->take(5)->get();
+        return response()->json([
+            'posts' => $posts
+        ]);
+    }
+
 }

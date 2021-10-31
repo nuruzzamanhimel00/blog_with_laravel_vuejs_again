@@ -27,7 +27,7 @@
                 <h5 class="widgetheading">Latest posts</h5>
                 <ul class="recent">
 
-                  <li  v-for="(value,key) in getAllPosts" :key="key" v-if="key<5" >
+                  <li  v-for="(value,key) in getSidebarLatestPost" :key="key" v-if="key<5" >
                     <img :src=" postImage(value.photo)" class="pull-left img-fluid" alt="" width="50" style="height:50px;" />
                     <h6>
                         <router-link tag="a" :to="{ name:'publicBlogSinglepost',  params:{id:value.id} }" >{{ value.title | toUpperCase }}</router-link>
@@ -56,14 +56,15 @@ export default {
     },
     mounted(){
         this.allCategoryMethod();
-        this.allPostsMethod();
+
+        this.sidebarLatestPost();
     },
     computed:{
         getAllCategory(){
             return this.$store.getters.getAllCategorGetters;
         },
-        getAllPosts(){
-            return this.$store.getters.getAllPostGetters;
+        getSidebarLatestPost(){
+            return this.$store.getters.publicSidebarLatestPostGetters;
         }
     },
     methods:{
@@ -71,8 +72,9 @@ export default {
              this.$store.dispatch('publicGetAllCategoryAction');
 
         },
-        allPostsMethod(){
-              this.$store.dispatch('publicGetAllPostAction');
+
+        sidebarLatestPost(){
+              this.$store.dispatch('publicSidebarLatestPostAction');
         },
         postImage(image){
              let str1 = image;

@@ -3000,7 +3000,9 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {};
   },
-  mounted: function mounted() {// this.$store.dispatch('publicGetAllPostAction');
+  mounted: function mounted() {
+    // this.$store.dispatch('publicGetAllPostAction');
+    this.allPostsMethod();
   },
   created: function created() {},
   computed: {
@@ -3017,6 +3019,9 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         return 'assets/images/' + image;
       }
+    },
+    allPostsMethod: function allPostsMethod() {
+      this.$store.dispatch('publicGetAllPostAction');
     }
   },
   components: {
@@ -3334,22 +3339,22 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.allCategoryMethod();
-    this.allPostsMethod();
+    this.sidebarLatestPost();
   },
   computed: {
     getAllCategory: function getAllCategory() {
       return this.$store.getters.getAllCategorGetters;
     },
-    getAllPosts: function getAllPosts() {
-      return this.$store.getters.getAllPostGetters;
+    getSidebarLatestPost: function getSidebarLatestPost() {
+      return this.$store.getters.publicSidebarLatestPostGetters;
     }
   },
   methods: {
     allCategoryMethod: function allCategoryMethod() {
       this.$store.dispatch('publicGetAllCategoryAction');
     },
-    allPostsMethod: function allPostsMethod() {
-      this.$store.dispatch('publicGetAllPostAction');
+    sidebarLatestPost: function sidebarLatestPost() {
+      this.$store.dispatch('publicSidebarLatestPostAction');
     },
     postImage: function postImage(image) {
       var str1 = image;
@@ -66625,7 +66630,7 @@ var render = function() {
           _c(
             "ul",
             { staticClass: "recent" },
-            _vm._l(_vm.getAllPosts, function(value, key) {
+            _vm._l(_vm.getSidebarLatestPost, function(value, key) {
               return key < 5
                 ? _c("li", { key: key }, [
                     _c("img", {
@@ -84520,7 +84525,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     posts: [],
     users: [],
     singlePost: [],
-    postCatId: []
+    postCatId: [],
+    sidebarLastesPost: []
   },
   getters: {
     getAllCategorGetters: function getAllCategorGetters(state) {
@@ -84537,6 +84543,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     },
     getPostByCatidGetters: function getPostByCatidGetters(state) {
       return state.postCatId;
+    },
+    publicSidebarLatestPostGetters: function publicSidebarLatestPostGetters(state) {
+      return state.sidebarLastesPost;
     }
   },
   mutations: {
@@ -84554,6 +84563,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     },
     getPostByCatidMutation: function getPostByCatidMutation(state, data) {
       state.postCatId = data;
+    },
+    publicSidebarLatestPostAction: function publicSidebarLatestPostAction(state, data) {
+      state.sidebarLastesPost = data;
     }
   },
   actions: {
@@ -84595,6 +84607,11 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
       axios.get("/public-get-post-catid/".concat(id)).then(function (reflection) {
         context.commit('getPostByCatidMutation', reflection.data.posts); // console.log(reflection.data.category);
       }); // alert(id);
+    },
+    publicSidebarLatestPostAction: function publicSidebarLatestPostAction(context) {
+      axios.get('/public-sidebar-latest-post').then(function (reflection) {
+        context.commit('publicSidebarLatestPostAction', reflection.data.posts);
+      });
     }
   }
 });

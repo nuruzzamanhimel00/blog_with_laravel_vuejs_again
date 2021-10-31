@@ -77,6 +77,7 @@ export default {
     },
     mounted(){
         // this.$store.dispatch('publicGetAllPostAction');
+         this.allPostsMethod();
     },
     created(){
 
@@ -84,7 +85,8 @@ export default {
     computed:{
         getAllPosts(){
             return this.$store.getters.getAllPostGetters;
-        }
+        },
+
     },
     methods:{
          postImage(image){
@@ -95,6 +97,9 @@ export default {
             }else{
               return   'assets/images/'+image;
             }
+        },
+        allPostsMethod(){
+              this.$store.dispatch('publicGetAllPostAction');
         },
     },
     components:{
