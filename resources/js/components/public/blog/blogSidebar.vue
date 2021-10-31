@@ -4,8 +4,8 @@
             <aside class="right-sidebar">
               <div class="widget">
                 <form class="form-search">
-                  <input placeholder="Type something" type="text" class="input-medium search-query">
-                  <button type="submit" class="btn btn-square btn-theme">Search</button>
+                  <input @keyup.prevent="readsearch" v-model="keywords" placeholder="Type something" type="text" class="input-medium search-query">
+                  <button type="submit" @submit.prevent="readsearch" class="btn btn-square btn-theme">Search</button>
                 </form>
               </div>
               <!-- {{ getAllCategory }} -->
@@ -51,7 +51,7 @@
 export default {
     data(){
         return {
-
+            keywords:'',
         }
     },
     mounted(){
@@ -85,6 +85,11 @@ export default {
               return   'assets/images/'+image;
             }
         },
+        readsearch(){
+            this.$store.dispatch('readtimeSearchAction',this.keywords);
+
+            console.log(this.keywords);
+        }
     }
 }
 </script>

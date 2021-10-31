@@ -19,7 +19,9 @@ Route::get('/public-all-post', 'BlogController@getAllPost')->name('public.allPos
 Route::get('/public-get-all-category', 'BlogController@getAllCategory')->name('public.getAllCategory');
 Route::get('/public-get-post-catid/{id}', 'BlogController@getPostByCatid')->name('public.catid');
 
-Route::get('//public-sidebar-latest-post', 'BlogController@getLatestPost')->name('public.latestPost');
+Route::get('/public-sidebar-latest-post', 'BlogController@getLatestPost')->name('public.latestPost');
+// read search
+Route::get('/read-search', 'BlogController@readsearch')->name('public.readsearch');
 
 // *************** Admin Panel ****************************
 Route::get('/admin', 'HomeController@index')->name('admin');

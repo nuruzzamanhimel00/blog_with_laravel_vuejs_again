@@ -51,4 +51,24 @@ class BlogController extends Controller
         ]);
     }
 
+    public function readsearch(Request $request){
+        $search = $request->search;
+
+        if(!is_null($search)){
+            $posts = Post::with(['user','category'])
+        ->where('title','like',"%".$search."%")
+        ->orWhere('description','like',"%".$search."%")
+        ->orderBy('id','desc')
+        ->get();
+        }else{
+            $posts = Post::with(['user','category'])
+        ->orderBy('id','desc')
+        ->get();
+        }
+        return response()->json([
+            'posts' => $posts
+        ]);
+        // dd($request->all());
+    }
+
 }

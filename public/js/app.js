@@ -3335,7 +3335,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {};
+    return {
+      keywords: ''
+    };
   },
   mounted: function mounted() {
     this.allCategoryMethod();
@@ -3364,6 +3366,10 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         return 'assets/images/' + image;
       }
+    },
+    readsearch: function readsearch() {
+      this.$store.dispatch('readtimeSearchAction', this.keywords);
+      console.log(this.keywords);
     }
   }
 });
@@ -66587,7 +66593,50 @@ var render = function() {
   return _c("span", { attrs: { id: "blogSidebar" } }, [
     _c("div", { staticClass: "span4" }, [
       _c("aside", { staticClass: "right-sidebar" }, [
-        _vm._m(0),
+        _c("div", { staticClass: "widget" }, [
+          _c("form", { staticClass: "form-search" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.keywords,
+                  expression: "keywords"
+                }
+              ],
+              staticClass: "input-medium search-query",
+              attrs: { placeholder: "Type something", type: "text" },
+              domProps: { value: _vm.keywords },
+              on: {
+                keyup: function($event) {
+                  $event.preventDefault()
+                  return _vm.readsearch.apply(null, arguments)
+                },
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.keywords = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-square btn-theme",
+                attrs: { type: "submit" },
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.readsearch.apply(null, arguments)
+                  }
+                }
+              },
+              [_vm._v("Search")]
+            )
+          ])
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "widget" }, [
           _c("h5", { staticClass: "widgetheading" }, [_vm._v("Categories")]),
@@ -66682,30 +66731,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "widget" }, [
-      _c("form", { staticClass: "form-search" }, [
-        _c("input", {
-          staticClass: "input-medium search-query",
-          attrs: { placeholder: "Type something", type: "text" }
-        }),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-square btn-theme",
-            attrs: { type: "submit" }
-          },
-          [_vm._v("Search")]
-        )
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -84566,6 +84592,11 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     },
     publicSidebarLatestPostAction: function publicSidebarLatestPostAction(state, data) {
       state.sidebarLastesPost = data;
+    },
+    readsearchMutation: function readsearchMutation(state, data) {
+      state.posts = data;
+      state.postCatId = data;
+      state.singlePost = data;
     }
   },
   actions: {
@@ -84612,6 +84643,12 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
       axios.get('/public-sidebar-latest-post').then(function (reflection) {
         context.commit('publicSidebarLatestPostAction', reflection.data.posts);
       });
+    },
+    readtimeSearchAction: function readtimeSearchAction(context, data) {
+      axios.get('/read-search?search=' + data).then(function (reflection) {
+        context.commit('readsearchMutation', reflection.data.posts); // console.log(reflection.data.posts);
+      });
+      ;
     }
   }
 });

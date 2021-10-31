@@ -53,6 +53,11 @@ export const store = new Vuex.Store({
         },
         publicSidebarLatestPostAction(state,data){
             state.sidebarLastesPost = data;
+        },
+        readsearchMutation(state,data){
+            state.posts = data;
+            state.postCatId = data;
+            state.singlePost = data;
         }
     },
     actions: {
@@ -114,6 +119,13 @@ export const store = new Vuex.Store({
                 context.commit('publicSidebarLatestPostAction',reflection.data.posts);
 
             });
+        },
+        readtimeSearchAction(context,data){
+            axios.get('/read-search?search='+data)
+            .then((reflection)=>{
+                context.commit('readsearchMutation',reflection.data.posts);
+                // console.log(reflection.data.posts);
+            });;
         }
     }
   })
