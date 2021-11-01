@@ -48,6 +48,9 @@
 </template>
 
 <script>
+// loadash support
+   import _ from "lodash";
+
 export default {
     data(){
         return {
@@ -85,11 +88,10 @@ export default {
               return   'assets/images/'+image;
             }
         },
-        readsearch(){
-            this.$store.dispatch('readtimeSearchAction',this.keywords);
 
-            console.log(this.keywords);
-        }
+        readsearch:_.debounce(function(){
+           this.$store.dispatch('readtimeSearchAction',this.keywords);
+        },1000),
     }
 }
 </script>
